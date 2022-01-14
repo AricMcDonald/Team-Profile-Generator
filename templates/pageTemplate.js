@@ -1,42 +1,59 @@
-const Employee = require("../lib/Employee");
-const Engineer = require("../lib/Engineer");
-const Intern = require("../lib/Intern");
-
 const generateTeam = team => {
     //Write template cards for each team member
     //Write Functions for engineer and intern
     const generateManager = manager => {
         return `
 <div class="card employee-card">
-    <div class="card-header">
+    <div class="card-header bg-primary text-white">
         <h2 class="card-title">${manager.getName()}</h2>
         <h3 class="card-title">${manager.getRole()}</h3>
     </div>
     <div class="card-body">
         <ul class="list-group">
             <li class="list-group-item">ID: ${manager.getId()}</li>
-            <li class="list-group-item">ID: <a href="mailto:${manager.getEmail()}">${manager.getEmail()}</a></li>
-            <li class="list-group-item">ID: ${manager.officeNumber()}</li>
+            <li class="list-group-item">Email: <a href="mailto:${manager.getEmail()}">${manager.getEmail()}</a></li>
+            <li class="list-group-item">Office Number: ${manager.getOfficeNumber()}</li>
         </ul>
     </div>
-</div> }
+</div> `
+    }
 
-const
-    <div class="card-header">
-        <h2 class="card-title">${Engineer.getName()}</h2>
-        <h3 class="card-title">${Engineer.getRole()}</h3>
+    const generateEngineer = engineer => {
+    return `
+<div class="card employee-card">
+    <div class="card-header text-white bg-success">
+        <h2 class="card-title">${engineer.getName()}</h2>
+        <h3 class="card-title">${engineer.getRole()}</h3>
     </div>
     <div class="card-body">
         <ul class="list-group">
-            <li class="list-group-item">ID: ${Engineer.getId()}</li>
-            <li class="list-group-item">ID: <a href="mailto:${Engineer.getEmail()}">${engineer.getEmail()}</a></li>
-            <li class="list-group-item">ID: ${manager.officeNumber()}</li>
+            <li class="list-group-item">ID: ${engineer.getId()}</li>
+            <li class="list-group-item">Email: <a href="mailto:${engineer.getEmail()}">${engineer.getEmail()}</a></li>
+            <li class="list-group-item">GitHub: ${engineer.getGithub()}</li>
         </ul>
     </div>
+</div>
+`
 
+}
 
-    `
-    }
+const generateIntern = intern => {
+    return `
+<div class="card employee-card">
+    <div class="card-header text-white bg-secondary">
+        <h2 class="card-title">${intern.getName()}</h2>
+        <h3 class="card-title">${intern.getRole()}</h3>
+    </div>
+    <div class="card-body">
+        <ul class="list-group">
+            <li class="list-group-item">ID: ${intern.getId()}</li>
+            <li class="list-group-item">Email: <a href="mailto:${intern.getEmail()}">${intern.getEmail()}</a></li>
+            <li class="list-group-item">School: ${intern.getSchool()}</li>
+        </ul>
+    </div>
+</div>`
+}
+
 
     const html = [];
     //Repeat for intern and engineer
@@ -47,11 +64,13 @@ const
     // Start Copy here
     html.push(team
         .filter(employee => employee.getRole() === "Engineer")
-        .map(Engineer => generateManager(Engineer))
+        .map(engineer => generateEngineer(engineer))
+        .join('')
     );
     html.push(team
         .filter(employee => employee.getRole() === "Intern")
-        .map(Intern => generateManager(Intern))
+        .map(intern => generateIntern(intern))
+        .join('')
     );
 
     return html.join("");
@@ -72,7 +91,7 @@ module.exports = team => {
 </head>
 <body>
 
-    <div class="container-fluid">
+    <div class="container-fluid text-white bg-info">
         <div class="row">
             <div class="col-12 jumbotron mb-3 team-heading">
                 <h1 class="text-center">My Team</h1>
